@@ -1,7 +1,7 @@
 "use client";
 
 import { navLinks } from "@/constants";
-import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,8 +10,6 @@ import { Button } from "../ui/button";
 
 const Sidebar = () => {
   const pathname = usePathname();
-
-  const { user } = useUser();
 
   return (
     <aside className="sidebar">
