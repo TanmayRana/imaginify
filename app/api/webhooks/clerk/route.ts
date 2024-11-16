@@ -190,12 +190,14 @@ export async function POST(req: Request) {
         photo: image_url || "",
       };
 
+      // Assume createUser returns the user object directly
       const newUser = await createUser(user);
 
-      // Update user metadata if user creation was successful
-      if (newUser && newUser._id) {
+      const response = await newUser?.json();
+
+      if (newUser && response) {
         (await clerkClient()).users.updateUserMetadata(id, {
-          publicMetadata: { userId: newUser._id },
+          publicMetadata: { userId: response._id },
         });
       }
 
