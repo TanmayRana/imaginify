@@ -14,6 +14,8 @@ export async function createUser(user: CreateUserParams) {
 
     const newUser = await User.create(user);
 
+    console.log("newUser in user.actions.ts=", newUser);
+
     return Response.json(
       {
         message: "User created successfully",
