@@ -199,7 +199,7 @@ export async function POST(req: Request) {
       const newUser = await createUser(user);
 
       const userJson = await newUser?.json();
-      const userId = userJson._id;
+      const userId = userJson.newUser._id;
       console.log("userId=", userId);
       console.log("userJson=", userJson);
 
