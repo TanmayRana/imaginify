@@ -3,9 +3,9 @@
 import { revalidatePath } from "next/cache";
 
 import User from "../database/models/user.model";
-import connectToDatabase from "../database/mongoose";
 
 import { handleError } from "../utils";
+import connectToDatabase from "../database/mongoose";
 
 // CREATE
 export async function createUser(user: CreateUserParams) {
@@ -14,17 +14,7 @@ export async function createUser(user: CreateUserParams) {
 
     const newUser = await User.create(user);
 
-    console.log("newUser in user.actions.ts=", newUser);
-
-    return Response.json(
-      {
-        message: "User created successfully",
-        newUser,
-      },
-      {
-        status: 200,
-      }
-    );
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
     handleError(error);
   }
@@ -39,15 +29,7 @@ export async function getUserById(userId: string) {
 
     if (!user) throw new Error("User not found");
 
-    return Response.json(
-      {
-        message: "User found successfully",
-        user,
-      },
-      {
-        status: 200,
-      }
-    );
+    return JSON.parse(JSON.stringify(user));
   } catch (error) {
     handleError(error);
   }
@@ -64,15 +46,7 @@ export async function updateUser(clerkId: string, user: UpdateUserParams) {
 
     if (!updatedUser) throw new Error("User update failed");
 
-    return Response.json(
-      {
-        message: "User updated successfully",
-        updatedUser,
-      },
-      {
-        status: 200,
-      }
-    );
+    return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
     handleError(error);
   }
@@ -94,9 +68,7 @@ export async function deleteUser(clerkId: string) {
     const deletedUser = await User.findByIdAndDelete(userToDelete._id);
     revalidatePath("/");
 
-    return deletedUser
-      ? Response.json({ message: "User deleted successfully" })
-      : Response.json({ message: "User not found" }, { status: 404 });
+    return deletedUser ? JSON.parse(JSON.stringify(deletedUser)) : null;
   } catch (error) {
     handleError(error);
   }
@@ -115,15 +87,7 @@ export async function updateCredits(userId: string, creditFee: number) {
 
     if (!updatedUserCredits) throw new Error("User credits update failed");
 
-    return Response.json(
-      {
-        message: "User credits updated successfully",
-        updatedUserCredits,
-      },
-      {
-        status: 200,
-      }
-    );
+    return JSON.parse(JSON.stringify(updatedUserCredits));
   } catch (error) {
     handleError(error);
   }

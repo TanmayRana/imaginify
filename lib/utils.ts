@@ -119,6 +119,8 @@ export const download = (url: string, filename: string) => {
     throw new Error("Resource URL not provided! You need to provide one");
   }
 
+  console.log("url=>", url);
+
   fetch(url)
     .then((response) => response.blob())
     .then((blob) => {

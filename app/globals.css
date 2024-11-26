@@ -374,3 +374,7 @@
   font-weight: 600;
   color: #384262;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
